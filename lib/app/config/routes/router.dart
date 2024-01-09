@@ -3,6 +3,7 @@
 // import 'package:chater/app/modules/auth/views/splash_screen.dart';
 import 'package:connect_firebase/app/config/routes/my_named_routes.dart';
 import 'package:connect_firebase/app/modules/auth/views/login.dart';
+import 'package:connect_firebase/app/modules/auth/views/register.dart';
 import 'package:connect_firebase/app/modules/auth/views/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -32,11 +33,11 @@ abstract class AppRouter {
       ),
       GoRoute(
         parentNavigatorKey: rootNavigatorKey,
-        path: "/${MyNamedRoutes.login}",
-        name: MyNamedRoutes.login,
+        path: "/${MyNamedRoutes.register}",
+        name: MyNamedRoutes.register,
         pageBuilder: (context, state) => NoTransitionPage(
           key: state.pageKey,
-          child: const LoginScreen(),
+          child: RegisterScreen(),
         ),
       ),
     ],
