@@ -1,8 +1,8 @@
+import 'package:flutter/material.dart';
 import 'package:connect_firebase/app/config/theme/my_colors.dart';
 import 'package:connect_firebase/app/core/extensions/buid_context_extension.dart';
 import 'package:connect_firebase/app/modules/auth/domain/providers/auth_providers.dart';
 import 'package:connect_firebase/app/modules/auth/widgets/my_forms_widgets.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class RegisterScreen extends ConsumerWidget {

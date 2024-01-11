@@ -17,7 +17,7 @@ class SplashScreen extends StatelessWidget {
             child: Center(
                 child: GestureDetector(
                     onTap: () {
-                      context.pushNamed(MyNamedRoutes.register);
+                      context.pushNamed(MyNamedRoutes.login);
                     },
                     child: Text("Connect")))),
       ),

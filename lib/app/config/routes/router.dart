@@ -2,8 +2,8 @@
 // import 'package:chater/app/modules/auth/views/login_screen.dart';
 // import 'package:chater/app/modules/auth/views/splash_screen.dart';
 import 'package:connect_firebase/app/config/routes/my_named_routes.dart';
-import 'package:connect_firebase/app/modules/auth/views/login.dart';
 import 'package:connect_firebase/app/modules/auth/views/register.dart';
+import 'package:connect_firebase/app/modules/auth/views/google%20or%20login.dart';
 import 'package:connect_firebase/app/modules/auth/views/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -29,6 +29,15 @@ abstract class AppRouter {
         pageBuilder: (context, state) => NoTransitionPage(
           key: state.pageKey,
           child: const SplashScreen(),
+        ),
+      ),
+      GoRoute(
+        parentNavigatorKey: rootNavigatorKey,
+        path: "/${MyNamedRoutes.login}",
+        name: MyNamedRoutes.login,
+        pageBuilder: (context, state) => NoTransitionPage(
+          key: state.pageKey,
+          child: MainScreen(),
         ),
       ),
       GoRoute(
