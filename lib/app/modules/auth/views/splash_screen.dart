@@ -1,26 +1,70 @@
 import 'package:connect_firebase/app/config/routes/my_named_routes.dart';
+import 'package:connect_firebase/app/config/routes/router.dart';
 import 'package:connect_firebase/app/core/extensions/buid_context_extension.dart';
+import 'package:connect_firebase/app/modules/auth/domain/providers/auth_providers.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-class SplashScreen extends StatelessWidget {
+class SplashScreen extends ConsumerWidget {
   const SplashScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final checkIfAuth = ref.watch(checkIfAuthinticated);
     return Scaffold(
-      body: Center(
-        child: Container(
-            color: Colors.amber,
-            height: context.screenHeight * 0.3,
-            width: context.screenWidth * 0.2,
-            child: Center(
-                child: GestureDetector(
-                    onTap: () {
-                      context.pushNamed(MyNamedRoutes.login);
-                    },
-                    child: Text("Connect")))),
-      ),
+      body: checkIfAuth.when(data: (AsyncValue<User?> data) {
+        if (data.value?.uid != null) {
+          /*
+          Sometimes, you need to perform certain tasks after the UI has been updated and rendered. 
+          This could involve measuring the size of a widget, showing a dialog, or animating elements 
+          based on their final positions.
+          Using WidgetsBinding.instance.addPostFrameCallback allows you to delay these tasks until the next frame,
+          ensuring the UI is fully updated and the correct dimensions are available
+          */
+          WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+            context.goNamed(MyNamedRoutes.chats);
+          });
+        } else {
+          WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+            context.goNamed(MyNamedRoutes.register);
+          });
+        }
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
+      }, error: (Object error, StackTrace stackTrace) {
+        return Center(child: Text(error.toString()));
+      }, loading: () {
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
+      }),
     );
   }
 }
+// class SplashScreen extends ConsumerWidget {
+//   const SplashScreen({super.key});
+
+//   @override
+//   Widget build(BuildContext context, WidgetRef ref) {
+//     return Scaffold(
+//       body: Center(
+//         child: Container(
+//             color: Colors.amber,
+//             height: context.screenHeight * 0.3,
+//             width: context.screenWidth * 0.2,
+//             child: Center(
+//                 child: GestureDetector(
+//                     onTap: () {
+//                       context.pushNamed(MyNamedRoutes.login);
+//                       // context.pushNamed(MyNamedRoutes.homePage);
+
+//                       // context.goNamed(MyNamedRoutes.homePage);
+//                     },
+//                     child: Text("Connect")))),
+//       ),
+//     );
+//   }
+// }

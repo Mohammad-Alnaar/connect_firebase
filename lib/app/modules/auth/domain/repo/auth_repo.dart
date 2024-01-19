@@ -23,9 +23,10 @@ class AuthRepository {
         email: email,
         password: password,
       );
+      await userCredential.user!.updateDisplayName(userName);
       await saveUserInfoToFirebase(
           userCredential.user!.uid.toString(),
-          userCredential.user!.displayName.toString(),
+          userName,
           userCredential.user!.email.toString(),
           userCredential.user!.photoURL.toString());
 

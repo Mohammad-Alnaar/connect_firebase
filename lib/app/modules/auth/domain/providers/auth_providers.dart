@@ -26,3 +26,6 @@ final authControllerProvider = StateNotifierProvider<AuthController, AuthState>(
     );
   },
 );
+
+final checkIfAuthinticated =
+    FutureProvider((ref) => ref.watch(authStateProvider));

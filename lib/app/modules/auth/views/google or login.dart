@@ -45,7 +45,11 @@ class MainScreen extends ConsumerWidget {
               ),
               ElevatedButton(
                 onPressed: () {
-                  authController.signInWithGoogle();
+                  authController.signInWithGoogle().then((value) {
+                    if (value == true) {
+                      context.goNamed(MyNamedRoutes.splash);
+                    }
+                  });
                 },
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all<Color>(
