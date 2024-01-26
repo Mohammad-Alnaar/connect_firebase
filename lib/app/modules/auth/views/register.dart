@@ -1,9 +1,12 @@
+import 'package:connect_firebase/app/config/routes/my_named_routes.dart';
+import 'package:connect_firebase/app/config/routes/router.dart';
+import 'package:flutter/material.dart';
 import 'package:connect_firebase/app/config/theme/my_colors.dart';
 import 'package:connect_firebase/app/core/extensions/buid_context_extension.dart';
 import 'package:connect_firebase/app/modules/auth/domain/providers/auth_providers.dart';
 import 'package:connect_firebase/app/modules/auth/widgets/my_forms_widgets.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 class RegisterScreen extends ConsumerWidget {
   RegisterScreen({super.key});
@@ -34,10 +37,16 @@ class RegisterScreen extends ConsumerWidget {
             ElevatedButton(
               onPressed: () {
                 if (registerFormKey.currentState?.validate() == true) {
-                  authController.register(
-                      email: formProvider.email,
-                      userName: formProvider.userName,
-                      password: formProvider.password);
+                  authController
+                      .register(
+                          email: formProvider.email,
+                          userName: formProvider.userName,
+                          password: formProvider.password)
+                      .then((value) {
+                    if (value == true) {
+                      context.goNamed(MyNamedRoutes.splash);
+                    }
+                  });
                 }
               },
               child: Text(context.translate.register,
@@ -48,13 +57,19 @@ class RegisterScreen extends ConsumerWidget {
             ElevatedButton(
               onPressed: () {
                 if (registerFormKey.currentState?.validate() == true) {
-                  authController.register(
-                      email: formProvider.email,
-                      userName: formProvider.userName,
-                      password: formProvider.password);
+                  authController
+                      .register(
+                          email: formProvider.email,
+                          userName: formProvider.userName,
+                          password: formProvider.password)
+                      .then((value) {
+                    if (value == true) {
+                      context.goNamed(MyNamedRoutes.splash);
+                    }
+                  });
                 }
               },
-              child: Text(context.translate.googleSign,
+              child: Text(context.translate.login,
                   style: context.textTheme.bodyLarge?.copyWith(
                       fontWeight: FontWeight.bold,
                       color: MyColors.primary_500)),
