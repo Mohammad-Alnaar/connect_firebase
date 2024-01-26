@@ -1,5 +1,5 @@
 import 'package:connect_firebase/app/modules/auth/domain/repo/chats_repo.dart';
-import 'package:connect_firebase/app/modules/auth/domain/repo/user_model.dart';
+import 'package:connect_firebase/app/modules/auth/domain/models/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
